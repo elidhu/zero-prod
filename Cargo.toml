@@ -6,4 +6,37 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "zero-prod"
+path = "src/main.rs"
+
 [dependencies]
+actix-web = "4.0.0-beta.4"
+config = "0.11.0"
+serde = { version = "1", features = ["derive"]}
+
+[dependencies.sqlx]
+version = "0.5.1"
+default-features = false
+features = [
+    # Use the actix runtime for futures and rustls as TLS backend
+    "runtime-actix-rustls",
+    # sqlx::query! and sqlx::query::as! macros
+    "macros",
+    # Postgres specific stuff
+    "postgres",
+    # Map SQL UUID to Uuid from the uuid crate
+    "uuid",
+    # SQL timestampz to DateTime<T> from the chrono crate
+    "chrono",
+    # Access to the 
+    "migrate",
+]
+
+[dev-dependencies]
+actix-rt = "2"
+reqwest = "0.11"
+tokio = "1"
