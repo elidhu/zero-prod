@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -x
-set -euo pipefail
+set -eo pipefail
 
 # Check if a custom user has been set, otherwise default to 'postgres'
 DB_USER=${POSTGRES_USER:=postgres}
@@ -12,7 +12,7 @@ DB_NAME="${POSTGRES_DB:=newsletter}"
 DB_PORT="${POSTGRES_PORT:=5432}"
 
 # Skip docker if dockerized postgres is already running.
-if [[ -z "$SKIP_DOCKER" ]]; then
+if [[ -z "${SKIP_DOCKER}" ]]; then
   # Launch postgres using Docker
   docker run \
     -e POSTGRES_USER=${DB_USER} \
